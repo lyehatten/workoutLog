@@ -1,6 +1,10 @@
 let express = require('express');
 let app = express();
+let sequelize = require('./db');
 let log = require('./controllers/logcontroller')
+
+
+sequelize.sync()
 
 app.post('/user', function(req, res){
     res.send('hi this is our user shit')
