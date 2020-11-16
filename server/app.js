@@ -1,20 +1,22 @@
+require('dotenv').config(); 
 let express = require('express');
 let app = express();
 let sequelize = require('./db');
 let log = require('./controllers/logcontroller')
-
+let user = require('./controllers/usercontroller')
+const login = require('./controllers/logincontroller')
 
 sequelize.sync()
 
-app.post('/user', function(req, res){
-    res.send('hi this is our user shit')
-})
+app.use(express.json());
 
-app.post('/login', function(req, res){
-    res.send('woot woot')
-})
+app.use('/user', user);
 
-app.use('/log', log)
+app.use('/login', login)
+
+const validateSession = require('./middleware/validate-session')
+
+app.use('/log', validateSession, log);
 
 app.listen(4050, function (){
     console.log('App is listening on port 4050.');

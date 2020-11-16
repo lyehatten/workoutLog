@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('workout-log', 'postgres', 'WhatisUp!400', {
+const sequelize = new Sequelize('workout-log', 'postgres', process.env.PG_PASSWORD, {
     host: 'localhost',
     dialect: 'postgres'
 });
